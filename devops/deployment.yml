@@ -18,6 +18,6 @@ spec:
       serviceAccountName: sa-prueba-go
       containers:
       - name: prueba-go
-        image: jaimeyh/go-prueba:latest
+        image: jaimeyh/inframanager:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 9090
