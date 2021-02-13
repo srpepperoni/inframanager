@@ -33,11 +33,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Build and push Docker images
-    uses: docker/build-push-action@v2.2.2
-    with:
-      # Path to the Dockerfile
-      file: ../dockerfile
-      # Do not use cache when building the image
-      no-cache: true
-      # Push is a shorthand for --output=type=registry
-      push: # optional, default is false            
+      uses: docker/build-push-action@v2.2.2
+      with:
+        # Path to the Dockerfile
+        file: ../dockerfile
+        # Do not use cache when building the image
+        no-cache: true
+        # Push is a shorthand for --output=type=registry
+        push: # optional, default is false            
