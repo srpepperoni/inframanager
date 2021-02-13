@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mis-pruebas
+  name: prueba-go
+  labels:
+    app: prueba-go
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prueba-go
+  template:
+    metadata:
+      labels:
+        app: prueba-go
+    spec:
+      serviceAccountName: sa-prueba-go
+      containers:
+      - name: prueba-go
+        image: jaimeyh/go-prueba:latest
+        ports:
+        - containerPort: 8080
