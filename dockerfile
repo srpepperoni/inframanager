@@ -1,9 +1,15 @@
-FROM golang:1.14-alpine AS build
+FROM debian
 
-WORKDIR /src/
-COPY cmd/main/main.go go.* /src/
-RUN CGO_ENABLED=0 go build -o /bin/demo
+RUN apt-get update && apt-get install -y wget && apt-get install -y tar
+RUN wget -c https://golang.org/dl/go1.15.8.linux-amd64.tar.gz
+RUN tar -C /usr/local -xzf go1.15.8.linux-amd64.tar.gz
+# RUN export PATH=$PATH:/usr/local/go/bin
+ENV PATH="/usr/local/go/bin:${PATH}"
 
-FROM scratch
-COPY --from=build /bin/demo /bin/demo
-ENTRYPOINT ["/bin/demo"]
+WORKDIR go-app
+
+COPY . .
+
+RUN go build -o ./app cmd/main/main.go
+
+ENTRYPOINT /go-app/app
