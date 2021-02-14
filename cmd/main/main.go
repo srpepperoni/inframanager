@@ -38,9 +38,7 @@ func GetPodsFromNamespace(w http.ResponseWriter, r *http.Request) {
 
 	pods, err := clientset.CoreV1().Pods("").List(context.TODO(), metav1.ListOptions{})
 
-	if err != nil {
-		panic(err.Error())
-	}
+	fmt.Fprintln(w, err.Error())
 
 	fmt.Fprint(w, "There are d pods in the cluster\n", len(pods.Items))
 }
