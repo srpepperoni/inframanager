@@ -27,8 +27,6 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 func GetPodsFromNamespace(w http.ResponseWriter, r *http.Request) {
 	config, err := rest.InClusterConfig()
 
-	fmt.Fprint(w, "Config ServerName\n", config.ServerName, "\n", config.ContentConfig)
-
 	if err != nil {
 		panic(err.Error())
 	}
@@ -37,6 +35,8 @@ func GetPodsFromNamespace(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err.Error())
 	}
+
+	fmt.Fprintln(w, err.Error())
 
 	pods, err := clientset.CoreV1().Pods("").List(context.TODO(), metav1.ListOptions{})
 
