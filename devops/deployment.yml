@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: mis-pruebas
-  name: prueba-go
+  namespace: default
+  name: go-test
   labels:
-    app: prueba-go
+    app: go-test
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: prueba-go
+      app: go-test
   template:
     metadata:
       labels:
-        app: prueba-go
+        app: go-test
     spec:
-      serviceAccountName: viewer
+      serviceAccountName: my-test-sa
       containers:
-      - name: prueba-go
+      - name: go-test
         image: jaimeyh/inframanager:latest
         ports:
         - containerPort: 9090

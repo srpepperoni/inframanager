@@ -1,6 +1,7 @@
-I create service account token for prueba-go pod this way:
+I create service account and its token related to this way:
 
+```bash
+kubectl create serviceaccount my-test-sa # in default ns
 ```
-kubectl create serviceaccount sa-prueba-go -n mis-pruebas
-```
+After this, I create clusterrole and clusterrolebinding related to SA and deploy my POD with SA attach to it.
 

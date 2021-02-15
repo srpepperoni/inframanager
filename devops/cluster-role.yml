@@ -1,9 +1,8 @@
 apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
+kind: ClusterRole
 metadata:
-  name: viewer
-  namespace: mis-pruebas
+  name: my-test-clusterrole
 rules:
 - apiGroups: [""] # "" indicates the core API group
-  resources: ["pods"]
+  resources: ["pods","deployments","namespaces"]
   verbs: ["get", "watch", "list"]

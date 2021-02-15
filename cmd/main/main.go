@@ -16,12 +16,12 @@ func main() {
 
 	mux.HandleFunc("/", IndexHandler)
 	mux.HandleFunc("/getPods", GetPodsFromNamespace)
-	mux.HandleFunc("/getDeplois", GetDeployments)
+	mux.HandleFunc("/getDeploy", GetDeployments)
 	http.ListenAndServe(":9090", mux)
 }
 
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "hola mundo")
+	fmt.Fprintln(w, "Hello World")
 }
 
 func GetPodsFromNamespace(w http.ResponseWriter, r *http.Request) {
@@ -36,13 +36,18 @@ func GetPodsFromNamespace(w http.ResponseWriter, r *http.Request) {
 		panic(err.Error())
 	}
 
-	pods, err := clientset.CoreV1().Pods("mis-pruebas").List(context.TODO(), metav1.ListOptions{})
+	pods, err := clientset.CoreV1().Pods("default").List(context.TODO(), metav1.ListOptions{})
 
 	if err != nil {
 		panic(err.Error())
 	}
 
-	fmt.Fprint(w, "There are d pods in the cluster\n", len(pods.Items))
+	fmt.Fprintln(w, "There are ", len(pods.Items), " pods in the cluster")
+
+	for index, element := range pods.Items {
+		fmt.Fprintln(w, "POD ", index, " : ", element.Name)
+	}
+
 }
 
 func GetDeployments(w http.ResponseWriter, r *http.Request) {
@@ -57,8 +62,16 @@ func GetDeployments(w http.ResponseWriter, r *http.Request) {
 		panic(err.Error())
 	}
 
-	dep, err := clientset.AppsV1().Deployments("").Get(context.TODO(), "prueba-go", metav1.GetOptions{})
+	dep, err := clientset.AppsV1().Deployments("default").List(context.TODO(), metav1.ListOptions{})
 
-	fmt.Fprintln(w, dep.Name)
+	if err != nil {
+		panic(err.Error())
+	}
+
+	fmt.Fprintln(w, "There are ", len(dep.Items), " deployments in the cluster")
+
+	for index, element := range dep.Items {
+		fmt.Fprintln(w, "Deployment ", index, ": ", element.Name)
+	}
 
 }
