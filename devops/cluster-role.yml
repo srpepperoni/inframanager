@@ -3,6 +3,6 @@ kind: ClusterRole
 metadata:
   name: my-test-clusterrole
 rules:
-- apiGroups: [""] # "" indicates the core API group
+- apiGroups: ["","apps"] # "" indicates the core API group
   resources: ["pods","deployments","namespaces"]
   verbs: ["get", "watch", "list"]
