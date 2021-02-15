@@ -36,7 +36,7 @@ func GetPodsFromNamespace(w http.ResponseWriter, r *http.Request) {
 		panic(err.Error())
 	}
 
-	pods, err := clientset.CoreV1().Pods("").List(context.TODO(), metav1.ListOptions{})
+	pods, err := clientset.CoreV1().Pods("mis-pruebas").List(context.TODO(), metav1.ListOptions{})
 
 	fmt.Fprintln(w, err.Error())
 

@@ -15,7 +15,7 @@ spec:
       labels:
         app: prueba-go
     spec:
-      serviceAccountName: sa-prueba-go
+      serviceAccountName: viewer
       containers:
       - name: prueba-go
         image: jaimeyh/inframanager:latest
