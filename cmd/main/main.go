@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"inframanager/internal/datalayer"
 	"net/http"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -74,4 +75,9 @@ func GetDeployments(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintln(w, "Deployment ", index, ": ", element.Name)
 	}
 
+}
+
+func GetPlayersFromMongo() {
+	var client = datalayer.InitDataLayer()
+	defer client.Disconnect(context.Background())
 }
